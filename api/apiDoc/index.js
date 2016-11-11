@@ -11,6 +11,7 @@ const render=views(__dirname+'/../../views',{
 });
 
 router.get('/', function *() {
+  console.log('called')
   this.body=yield render('api',{html:'13132'});
 });
 
