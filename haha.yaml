@@ -1,0 +1,2886 @@
+#%RAML 0.8
+title: CK_lock
+version: v1.0
+baseUri: 'https://api.ckkey.com/v1'
+documentation:
+  - title: CK_lock
+    content: |-
+      ## Welcome
+
+      This is a place to put general notes and extra information, for internal use.
+
+      To get started designing/documenting this API, select a version on the left.
+/user:
+  displayName: user
+  /secure:
+    displayName: secure
+    /code:
+      displayName: code
+      post:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "mobile": {
+                          "type": "string"
+                      },
+                      "secureQA": {
+                          "type": "object",
+                          "properties": {
+                              "question": {
+                                  "type": "string"
+                              },
+                              "answer": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              }
+            example: '{}'
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "secureCode": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      },
+                      "required": [
+                          "code",
+                          "data"
+                      ]
+                  }
+    /forget:
+      displayName: forget
+      /qa:
+        displayName: qa
+        post:
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "mobile": {
+                            "type": "string"
+                        }
+                    }
+                }
+              example: '{}'
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "number"
+                            }
+                        }
+                    }
+      post:
+        description: |
+          <p>不需要token</p>
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {}
+              }
+            example: '{}'
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      }
+                  }
+        queryParameters:
+          mobile:
+            type: string
+          code:
+            type: string
+          password:
+            type: string
+          secureCode:
+            type: string
+          client:
+            type: string
+    /question:
+      displayName: question
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "secureCode": {
+                          "type": "string"
+                      },
+                      "QA": {
+                          "type": "array",
+                          "items": {
+                              "type": "object",
+                              "properties": {
+                                  "question": {
+                                      "type": "string"
+                                  },
+                                  "answer": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      }
+                  }
+      /password:
+        displayName: password
+        get:
+          headers:
+            token:
+              type: string
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                  example: |-
+                    {
+                        "code": 0
+                    }
+    /questions:
+      displayName: questions
+      post:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "mobile": {
+                          "type": "string"
+                      }
+                  }
+              }
+            example: '{}'
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "question": {
+                                      "type": "array",
+                                      "items": {
+                                          "type": "string"
+                                      }
+                                  }
+                              }
+                          }
+                      },
+                      "required": [
+                          "code",
+                          "data"
+                      ]
+                  }
+  /email:
+    displayName: email
+    delete:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "secureCode": {
+                        "type": "string"
+                    }
+                }
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "email"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+    /activate:
+      displayName: activate
+      get:
+        responses: {}
+        queryParameters:
+          code:
+            type: string
+  /sign:
+    displayName: sign
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "sign": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "sign"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ]
+                }
+  /locks:
+    displayName: locks
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "locks": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "lockId": {
+                                                "type": "number"
+                                            },
+                                            "nickname": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "data"
+                    ]
+                }
+  /verify-email:
+    displayName: verify-email
+    get:
+      responses: {}
+      queryParameters:
+        verifyCode:
+          type: string
+  /locks-info:
+    displayName: locks-info
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "locks": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "serial": {
+                                                "type": "string"
+                                            },
+                                            "locked": {
+                                                "type": "boolean"
+                                            },
+                                            "enBlue": {
+                                                "type": "boolean"
+                                            },
+                                            "enLight": {
+                                                "type": "boolean"
+                                            },
+                                            "enPassword": {
+                                                "type": "boolean"
+                                            },
+                                            "version": {
+                                                "type": "string"
+                                            },
+                                            "activateTime": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "data"
+                    ]
+                }
+  /info:
+    displayName: info
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "user": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "mobile": {
+                                            "type": "number"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "freeze": {
+                                            "type": "boolean"
+                                        },
+                                        "nickname": {
+                                            "type": "string"
+                                        },
+                                        "avatar": {
+                                            "type": "string"
+                                        },
+                                        "sign": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "mobile",
+                                        "email",
+                                        "freeze",
+                                        "nickname",
+                                        "avatar",
+                                        "sign"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+  /relation:
+    displayName: relation
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "forgetMobile": {
+                        "type": "string"
+                    },
+                    "friendMobile": {
+                        "type": "string"
+                    },
+                    "client": {
+                        "type": "string"
+                    }
+                }
+            }
+          example: |-
+            {
+                "forgetMobile": "18712752136",
+                "friendMobile": "18712779903",
+                "client": "MOBILE"
+            }
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer"
+                        }
+                    }
+                }
+              example: |-
+                {
+                    "code": 20014
+                }
+  /verify:
+    displayName: verify
+    '/{mobile}':
+      displayName: '{mobile}'
+      uriParameters:
+        mobile:
+          type: string
+      post:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "type": {
+                          "type": "string",
+                          "enum": "['REGISTER'],['SHARELOGIN'],['FORGET'],['UPDATE_PASSWORD']"
+                      },
+                      "client": {
+                          "type": "string",
+                          "enum": "['MOBILE'],['WEB']"
+                      }
+                  },
+                  "required": [
+                      "type",
+                      "client"
+                  ]
+              }
+            example: '{}'
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      },
+                      "required": [
+                          "code"
+                      ]
+                  }
+  /mobile:
+    displayName: mobile
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "secureCode": {
+                        "type": "string"
+                    },
+                    "verifyCode": {
+                        "type": "string"
+                    },
+                    "mobile": {
+                        "type": "string"
+                    },
+                    "client": {
+                        "type": "string"
+                    }
+                }
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+  /register:
+    displayName: register
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "password": {
+                        "type": "string"
+                    },
+                    "mobile": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "secureQA": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "question": {
+                                    "type": "string"
+                                },
+                                "answer": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "question",
+                                "answer"
+                            ]
+                        }
+                    },
+                    "client": {
+                        "type": "string",
+                        "enum": "['MOBILE'],['WEB']"
+                    }
+                },
+                "required": [
+                    "password",
+                    "mobile",
+                    "code",
+                    "secureQA",
+                    "client"
+                ]
+            }
+          example: '{}'
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "user": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "mobile": {
+                                            "type": "number"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "freeze": {
+                                            "type": "boolean"
+                                        },
+                                        "nickname": {
+                                            "type": "string"
+                                        },
+                                        "avatar": {
+                                            "type": "string"
+                                        },
+                                        "sign": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "mobile",
+                                        "email",
+                                        "freeze",
+                                        "nickname",
+                                        "avatar",
+                                        "sign"
+                                    ]
+                                },
+                                "token": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "createAt": {
+                                            "type": "number"
+                                        },
+                                        "expiresAt": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "token",
+                                        "createAt",
+                                        "expiresAt"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+  /push:
+    displayName: push
+    /setting:
+      displayName: setting
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "settings": {
+                          "type": "object",
+                          "properties": {
+                              "shareOpen": {
+                                  "type": "boolean"
+                              },
+                              "keyShare": {
+                                  "type": "boolean"
+                              },
+                              "updatePassword": {
+                                  "type": "boolean"
+                              }
+                          }
+                      },
+                      "lockId": {
+                          "type": "number"
+                      }
+                  },
+                  "required": [
+                      "settings"
+                  ]
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      },
+                      "required": [
+                          "code"
+                      ]
+                  }
+    /settings:
+      displayName: settings
+      get:
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "settings": {
+                                      "type": "object",
+                                      "properties": {
+                                          "shareOpen": {
+                                              "type": "boolean"
+                                          },
+                                          "keyShare": {
+                                              "type": "boolean"
+                                          },
+                                          "updatePassword": {
+                                              "type": "boolean"
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      },
+                      "required": [
+                          "code",
+                          "data"
+                      ]
+                  }
+  /share-key:
+    displayName: share-key
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "required": [
+                                "shareKey"
+                            ],
+                            "properties": {
+                                "shareKey": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "shareId": {
+                                                "type": "number"
+                                            },
+                                            "toMobile": {
+                                                "type": "string"
+                                            },
+                                            "isTemp": {
+                                                "type": "boolean"
+                                            },
+                                            "isForever": {
+                                                "type": "boolean"
+                                            },
+                                            "beginAt": {
+                                                "type": "number"
+                                            },
+                                            "endAt": {
+                                                "type": "number"
+                                            },
+                                            "remainTimes": {
+                                                "type": "number"
+                                            },
+                                            "avatar": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "shareId",
+                                            "toMobile",
+                                            "isTemp",
+                                            "avatar"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "data"
+                    ]
+                }
+  /avatar:
+    displayName: avatar
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "avatar": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "avatar"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+  /nickname:
+    displayName: nickname
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+  /forget:
+    displayName: forget
+    /all:
+      displayName: all
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "forgetMobile": {
+                          "type": "string"
+                      },
+                      "forgetCode": {
+                          "type": "string"
+                      },
+                      "friendMobile": {
+                          "type": "string"
+                      },
+                      "friendCode": {
+                          "type": "string"
+                      },
+                      "password": {
+                          "type": "string"
+                      },
+                      "secureQA": {
+                          "type": "array",
+                          "items": {
+                              "type": "object",
+                              "properties": {
+                                  "question": {
+                                      "type": "string"
+                                  },
+                                  "answer": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      },
+                      "client": {
+                          "type": "string"
+                      }
+                  }
+              }
+            example: |-
+              {
+                  "forgetMobile": "18712752136",
+                  "forgetCode": "1234",
+                  "friendMobile": "18712779903",
+                  "friendCode": "1234",
+                  "password": "123456",
+                  "secureQA": [
+                      {
+                          "question": "123",
+                          "answer": "123"
+                      }
+                  ],
+                  "client": "MOBILE"
+              }
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0
+                  }
+  /password:
+    displayName: password
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "oldPassword": {
+                        "type": "string"
+                    },
+                    "newPassword": {
+                        "type": "string"
+                    },
+                    "secureCode": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "oldPassword",
+                    "newPassword",
+                    "secureCode"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ]
+                }
+  /login:
+    displayName: login
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "description": "username",
+                "properties": {
+                    "mobile": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "client": {
+                        "type": "string",
+                        "enum": "['MOBILE'],['WEB'}"
+                    }
+                },
+                "required": [
+                    "mobile",
+                    "password",
+                    "client"
+                ]
+            }
+          example: '{}'
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number",
+                            "default": 20000
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+/lock:
+  displayName: lock
+  '/{lockId}':
+    displayName: '{lockId}'
+    /number:
+      displayName: number
+      get:
+        headers:
+          token:
+            type: string
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "lockId": {
+                                      "type": "integer"
+                                  },
+                                  "sharedNumber": {
+                                      "type": "integer"
+                                  },
+                                  "userNumber": {
+                                      "type": "integer"
+                                  },
+                                  "name": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0,
+                      "data": {
+                          "lockId": 7,
+                          "sharedNumber": 10,
+                          "userNumber": 4,
+                          "name": "fff"
+                      }
+                  }
+    /users:
+      displayName: users
+      get:
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "users": {
+                                      "type": "array",
+                                      "items": {
+                                          "type": "object",
+                                          "properties": {
+                                              "nickname": {
+                                                  "type": "string"
+                                              },
+                                              "mobile": {
+                                                  "type": "string"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+    /password:
+      displayName: password
+      put:
+        description: |
+          <p>发短信或者推送</p>
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "password": {
+                          "type": "string"
+                      }
+                  }
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      }
+                  }
+      get:
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "password": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      },
+                      "required": [
+                          "code",
+                          "data"
+                      ]
+                  }
+    /share:
+      displayName: share
+      /password:
+        displayName: password
+        get:
+          headers:
+            token:
+              type: string
+              required: true
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "number"
+                            },
+                            "data": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "required": [
+                            "code",
+                            "data"
+                        ]
+                    }
+      '/{shareId}':
+        displayName: '{shareId}'
+        uriParameters:
+          shareId:
+            type: string
+        delete:
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "number"
+                            }
+                        }
+                    }
+        get:
+          headers:
+            token:
+              type: string
+              required: true
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "integer"
+                            },
+                            "data": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "object",
+                                        "properties": {
+                                            "shareId": {
+                                                "type": "integer"
+                                            },
+                                            "from": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "userId": {
+                                                        "type": "integer"
+                                                    },
+                                                    "mobile": {
+                                                        "type": "string"
+                                                    },
+                                                    "nickname": {
+                                                        "type": "null"
+                                                    }
+                                                }
+                                            },
+                                            "to": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "userId": {
+                                                        "type": "integer"
+                                                    },
+                                                    "mobile": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "isTemp": {
+                                                "type": "boolean"
+                                            },
+                                            "isForever": {
+                                                "type": "boolean"
+                                            },
+                                            "beginAt": {
+                                                "type": "integer"
+                                            },
+                                            "endAt": {
+                                                "type": "integer"
+                                            },
+                                            "remainTimes": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                  example: |-
+                    {
+                        "code": 0,
+                        "data": {
+                            "key": {
+                                "shareId": 68,
+                                "from": {
+                                    "userId": 7,
+                                    "mobile": "18712752136",
+                                    "nickname": null
+                                },
+                                "to": {
+                                    "userId": 11,
+                                    "mobile": "18712771031"
+                                },
+                                "isTemp": true,
+                                "isForever": false,
+                                "beginAt": 0,
+                                "endAt": 0,
+                                "remainTimes": 0
+                            }
+                        }
+                    }
+    /share-key:
+      displayName: share-key
+      get:
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "keys": {
+                                      "type": "array",
+                                      "items": {
+                                          "type": "object",
+                                          "properties": {
+                                              "shareId": {
+                                                  "type": "integer"
+                                              },
+                                              "toMobile": {
+                                                  "type": "string"
+                                              },
+                                              "isTemp": {
+                                                  "type": "boolean"
+                                              },
+                                              "isForever": {
+                                                  "type": "boolean"
+                                              },
+                                              "beginAt": {
+                                                  "type": "integer"
+                                              },
+                                              "endAt": {
+                                                  "type": "integer"
+                                              },
+                                              "remainTimes": {
+                                                  "type": "integer"
+                                              },
+                                              "avatar": {
+                                                  "type": "string"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0,
+                      "data": {
+                          "keys": [
+                              {
+                                  "shareId": 85,
+                                  "toMobile": "18712788595",
+                                  "isTemp": true,
+                                  "isForever": false,
+                                  "beginAt": 0,
+                                  "endAt": 0,
+                                  "remainTimes": 0,
+                                  "avatar": "http://od353eo13.bkt.clouddn.com/1-1475157999499.jpg"
+                              }
+                          ]
+                      }
+                  }
+    /tmp-password:
+      displayName: tmp-password
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "tempPassword": {
+                          "type": "array",
+                          "items": {
+                              "type": "integer"
+                          }
+                      }
+                  }
+              }
+            example: |-
+              {
+                  "tempPassword": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                  ]
+              }
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      }
+                  }
+    /records:
+      displayName: records
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "records": {
+                          "type": "array",
+                          "items": {
+                              "type": "object",
+                              "properties": {
+                                  "time": {
+                                      "type": "number"
+                                  },
+                                  "type": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      },
+                      "required": [
+                          "code"
+                      ]
+                  }
+      get:
+        description: |
+          <p>/**
+          * 1 手机开锁成功
+          * 2 手机开锁失败
+          * 3 密码开锁成功
+          * 4 密码开锁失败
+          */</p>
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "required": [
+                                  "records"
+                              ],
+                              "properties": {
+                                  "records": {
+                                      "type": "array",
+                                      "items": {
+                                          "type": "object",
+                                          "properties": {
+                                              "lockId": {
+                                                  "type": "number"
+                                              },
+                                              "userId": {
+                                                  "type": "number"
+                                              },
+                                              "type": {
+                                                  "type": "string"
+                                              },
+                                              "index": {
+                                                  "type": "number"
+                                              },
+                                              "time": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  },
+                                  "sum": {
+                                      "type": "number"
+                                  }
+                              }
+                          }
+                      },
+                      "required": [
+                          "code",
+                          "data"
+                      ]
+                  }
+        queryParameters:
+          page:
+            type: number
+          size:
+            type: number
+    /auth-code:
+      displayName: auth-code
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "authSeed": {
+                          "type": "string"
+                      }
+                  }
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "authCode": {
+                                      "type": "string"
+                                  },
+                                  "time": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+    /info:
+      displayName: info
+      get:
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "lock": {
+                                      "type": "object",
+                                      "properties": {
+                                          "id": {
+                                              "type": "integer"
+                                          },
+                                          "mac": {
+                                              "type": "string"
+                                          },
+                                          "serial": {
+                                              "type": "string"
+                                          },
+                                          "password": {
+                                              "type": "string"
+                                          },
+                                          "locked": {
+                                              "type": "boolean"
+                                          },
+                                          "enLight": {
+                                              "type": "boolean"
+                                          },
+                                          "enBlue": {
+                                              "type": "boolean"
+                                          },
+                                          "enPassword": {
+                                              "type": "boolean"
+                                          },
+                                          "authCode": {
+                                              "type": "string"
+                                          },
+                                          "activateTime": {
+                                              "type": "integer"
+                                          }
+                                      }
+                                  },
+                                  "lockName": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0,
+                      "data": {
+                          "lock": {
+                              "id": 7,
+                              "mac": "D0:B5:C2:9F:73:1A",
+                              "serial": "010000000016072401",
+                              "password": "123456",
+                              "locked": false,
+                              "enLight": true,
+                              "enBlue": true,
+                              "enPassword": true,
+                              "authCode": "712305",
+                              "activateTime": 1475140846683
+                          },
+                          "lockName": "ggg"
+                      }
+                  }
+    /status:
+      displayName: status
+      put:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "enBlue": {
+                          "type": "boolean"
+                      },
+                      "enLight": {
+                          "type": "boolean"
+                      },
+                      "enPassword": {
+                          "type": "boolean"
+                      }
+                  }
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          }
+                      }
+                  }
+    /unbind:
+      displayName: unbind
+      '/{userId}':
+        displayName: '{userId}'
+        uriParameters:
+          userId:
+            type: string
+        delete:
+          responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "number"
+                            }
+                        }
+                    }
+  /bind:
+    displayName: bind
+    post:
+      description: |
+        <p>发短信或者推送</p>
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "lockId": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "enBlue": {
+                        "type": "boolean"
+                    },
+                    "enLight": {
+                        "type": "boolean"
+                    },
+                    "enPassowrd": {
+                        "type": "boolean"
+                    },
+                    "serial": {
+                        "type": "string"
+                    },
+                    "mobile": {
+                        "type": "string"
+                    },
+                    "lockPassword": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "lockId"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ]
+                }
+  /users:
+    displayName: users
+    /number:
+      displayName: number
+      post:
+        body:
+          application/json:
+            schema: |-
+              {
+                  "type": "object",
+                  "properties": {
+                      "lockIds": {
+                          "type": "array",
+                          "items": {
+                              "type": "number"
+                          }
+                      }
+                  }
+              }
+            example: '{}'
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "number"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "locks": {
+                                      "type": "array",
+                                      "items": {
+                                          "type": "object",
+                                          "properties": {
+                                              "lockId": {
+                                                  "type": "number"
+                                              },
+                                              "number": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+    /mac:
+      displayName: mac
+      get:
+        headers:
+          token:
+            type: string
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          },
+                          "data": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "lockId": {
+                                          "type": "integer"
+                                      },
+                                      "mac": {
+                                          "type": "string"
+                                      },
+                                      "serial": {
+                                          "type": "string"
+                                      },
+                                      "enBlue": {
+                                          "type": "boolean"
+                                      },
+                                      "enLight": {
+                                          "type": "boolean"
+                                      },
+                                      "enPassword": {
+                                          "type": "boolean"
+                                      },
+                                      "version": {
+                                          "type": "null"
+                                      },
+                                      "activateTime": {
+                                          "type": "integer"
+                                      },
+                                      "name": {
+                                          "type": "string"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0,
+                      "data": [
+                          {
+                              "lockId": 7,
+                              "mac": "D0:B5:C2:9F:73:10",
+                              "serial": "010000000016072401",
+                              "enBlue": true,
+                              "enLight": true,
+                              "enPassword": true,
+                              "version": null,
+                              "activateTime": 1475140846683,
+                              "name": "ggg"
+                          }
+                      ]
+                  }
+  '/{serial}':
+    displayName: '{serial}'
+    uriParameters:
+      serial:
+        type: string
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "lockId": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ]
+                }
+/common:
+  displayName: common
+  /firmware:
+    displayName: firmware
+    /download:
+      displayName: download
+      get:
+        headers:
+          token:
+            type: string
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "download": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0,
+                      "data": {
+                          "download": "http://222.bin"
+                      }
+                  }
+    /version:
+      displayName: version
+      get:
+        headers:
+          token:
+            type: string
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          },
+                          "data": {
+                              "type": "object",
+                              "properties": {
+                                  "version": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 0,
+                      "data": {
+                          "version": "1.0"
+                      }
+                  }
+  /uptoken:
+    displayName: uptoken
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses: {}
+/server:
+  displayName: server
+  /time:
+    displayName: time
+    get:
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "timestamp": {
+                            "type": "number"
+                        }
+                    }
+                }
+/share:
+  displayName: share
+  /records:
+    displayName: records
+    get:
+      description: |
+        <p>==== type ====
+        1 分享钥匙
+        2 关闭钥匙
+        3 分享一次性密码
+        4 关闭一次性密码</p>
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "required": [
+                                "shareKey"
+                            ],
+                            "properties": {
+                                "shareKey": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "lockId": {
+                                                "type": "number"
+                                            },
+                                            "isTemp": {
+                                                "type": "boolean"
+                                            },
+                                            "isForever": {
+                                                "type": "boolean"
+                                            },
+                                            "from": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "userId": {
+                                                        "type": "number"
+                                                    },
+                                                    "mobile": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "nickname": {
+                                                        "type": "string"
+                                                    },
+                                                    "avatar": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "to": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "userId": {
+                                                        "type": "number"
+                                                    },
+                                                    "mobile": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "nickname": {
+                                                        "type": "string"
+                                                    },
+                                                    "avatar": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": {
+                                                "type": "number"
+                                            },
+                                            "operatingTime": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "lockId",
+                                            "isTemp"
+                                        ]
+                                    }
+                                },
+                                "sum": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "data"
+                    ]
+                }
+      queryParameters:
+        page:
+          type: number
+        size:
+          type: number
+  /login:
+    displayName: login
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "mobile": {
+                        "type": "number"
+                    },
+                    "code": {
+                        "type": "number"
+                    },
+                    "client": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "mobile",
+                    "code"
+                ]
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "user": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "mobile": {
+                                            "type": "number"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "freeze": {
+                                            "type": "boolean"
+                                        },
+                                        "nickname": {
+                                            "type": "string"
+                                        },
+                                        "avatar": {
+                                            "type": "string"
+                                        },
+                                        "sign": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "mobile",
+                                        "email",
+                                        "freeze",
+                                        "nickname",
+                                        "avatar",
+                                        "sign"
+                                    ]
+                                },
+                                "token": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "createAt": {
+                                            "type": "number"
+                                        },
+                                        "expiresAt": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "token",
+                                        "createAt",
+                                        "expiresAt"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "data"
+                    ]
+                }
+  /forever:
+    displayName: forever
+    get:
+      headers:
+        token:
+          type: string
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer"
+                        }
+                    }
+                }
+              example: |-
+                {
+                    "code": 0
+                }
+  /short-term:
+    displayName: short-term
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "mobile": {
+                        "type": "string"
+                    },
+                    "lockId": {
+                        "type": "integer"
+                    }
+                }
+            }
+          example: |-
+            {
+                "mobile": "15603325350",
+                "lockId": 6,
+                "action": "ss"
+            }
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "tempPassword": {
+                                    "type": "object",
+                                    "properties": {
+                                        "lockId": {
+                                            "type": "integer"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        },
+                                        "isValid": {
+                                            "type": "boolean"
+                                        },
+                                        "userId": {
+                                            "type": "integer"
+                                        },
+                                        "index": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+              example: |-
+                {
+                    "code": 0,
+                    "data": {
+                        "tempPassword": {
+                            "lockId": 6,
+                            "password": "134564",
+                            "isValid": true,
+                            "userId": 42,
+                            "index": 7
+                        }
+                    }
+                }
+  /long-term:
+    displayName: long-term
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "beginAt": {
+                        "type": "number"
+                    },
+                    "endAt": {
+                        "type": "number"
+                    },
+                    "times": {
+                        "type": "number"
+                    },
+                    "mobile": {
+                        "type": "string"
+                    },
+                    "lockId": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "beginAt",
+                    "endAt",
+                    "times",
+                    "mobile"
+                ]
+            }
+          example: |-
+            {
+                "beginAt": 1005766,
+                "endAt": -23381985,
+                "times": -51959560,
+                "mobile": "Lorem ullamco",
+                "lockId": -81993870
+            }
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        }
+                    }
+                }
+  /keys:
+    displayName: keys
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "data": {
+                            "type": "object",
+                            "required": [
+                                "sharedKey"
+                            ],
+                            "properties": {
+                                "sharedKey": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "userId": {
+                                                "type": "number"
+                                            },
+                                            "lockId": {
+                                                "type": "number"
+                                            },
+                                            "remianTimes": {
+                                                "type": "number"
+                                            },
+                                            "beginAt": {
+                                                "type": "number"
+                                            },
+                                            "endAt": {
+                                                "type": "number"
+                                            },
+                                            "sharedBy": {
+                                                "type": "number"
+                                            },
+                                            "isTemp": {
+                                                "type": "boolean"
+                                            },
+                                            "isForever": {
+                                                "type": "boolean"
+                                            },
+                                            "serial": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "userId",
+                                            "lockId",
+                                            "sharedBy",
+                                            "isTemp"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "data"
+                    ]
+                }
+/admin:
+  displayName: admin
+  /login:
+    displayName: login
+    get:
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "admin": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "mobile": {
+                                            "type": "string"
+                                        },
+                                        "createAt": {
+                                            "type": "integer"
+                                        },
+                                        "freeze": {
+                                            "type": "boolean"
+                                        },
+                                        "nickname": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "token": {
+                                    "type": "object",
+                                    "properties": {
+                                        "userId": {
+                                            "type": "integer"
+                                        },
+                                        "client": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "createAt": {
+                                            "type": "integer"
+                                        },
+                                        "updateAt": {
+                                            "type": "integer"
+                                        },
+                                        "expiresAt": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+              example: |-
+                {
+                    "code": 0,
+                    "data": {
+                        "admin": {
+                            "id": 1,
+                            "mobile": "15603325350",
+                            "createAt": 0,
+                            "freeze": false,
+                            "nickname": "trons"
+                        },
+                        "token": {
+                            "userId": 1,
+                            "client": "MOBILE",
+                            "token": "0c9f595f28704df59f6a1e5a6366538a",
+                            "createAt": 1478339863121,
+                            "updateAt": 1478339865714,
+                            "expiresAt": 604800000
+                        }
+                    }
+                }
+  /info:
+    displayName: info
+    get:
+      headers:
+        token:
+          type: string
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "admin": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "mobile": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        },
+                                        "createAt": {
+                                            "type": "integer"
+                                        },
+                                        "freeze": {
+                                            "type": "boolean"
+                                        },
+                                        "nickname": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+              example: |-
+                {
+                    "code": 0,
+                    "data": {
+                        "admin": {
+                            "id": 1,
+                            "mobile": "15603325350",
+                            "password": "76766d1101a9579c3ccb314e4389df3f",
+                            "createAt": 0,
+                            "freeze": false,
+                            "nickname": "trons"
+                        }
+                    }
+                }
+  /lockInfo:
+    displayName: lockInfo
+    /import:
+      displayName: import
+      post:
+        body:
+          multipart/form-data:
+            formParameters:
+              file:
+                type: string
+        headers:
+          token:
+            type: string
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                      "type": "object",
+                      "properties": {
+                          "code": {
+                              "type": "integer"
+                          }
+                      }
+                  }
+                example: |-
+                  {
+                      "code": 10001
+                  }

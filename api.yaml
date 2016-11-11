@@ -1,0 +1,183 @@
+#%RAML 0.8
+title: WALL_API
+version: v1.0
+baseUri: 'http://api.wall.qoder.cn'
+documentation:
+  - title: WALL_API
+    content: |-
+     ## Welcome
+
+     数学与统计学院实验室弹幕系统API文档
+/auth:
+  displayName: auth
+  /login:
+    displayName: login
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type":"object",
+                "properties": {
+                    "email":{
+                        "type":"string"
+                    },
+                    "password":{
+                        "type":"string"
+                    },
+                    "verifyCode":{
+                        "type":"string"
+                    }
+                }
+            }
+          example: '{}'
+      responses:
+              '200':
+                body:
+                  application/json:
+                    schema: |-
+                      {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "data": {
+                                  "type": "object",
+                                  "properties": {
+                                      "token": {
+                                          "type": "obejct",
+                                          "properties": {
+                                            "createAt": "string",
+                                            "expiresAt": "string",
+                                            "token": "string"
+                                          }
+                                      }
+                                  }
+                              }
+                          },
+                          "required": [
+                              "code",
+                              "data"
+                          ]
+                      }
+  /register:
+    displayName: register
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                 "properties": {
+                    "email": "string",
+                    "password": "string"
+                 }
+            }
+          example: "{}"
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties": {
+                        "code":"number",
+                        "token": {
+                            "type": "object",
+                            "properties": {
+                                "createAt": "string",
+                                "expiresAt": "string",
+                                "token": "string"
+                            }
+                        }
+                    }
+                }
+
+  /reSendEmail:
+    displayName: reSendEmail
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": "string"
+                }
+            }
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties":{
+                        "code": "number"
+                    }
+                }
+/home:
+  displayName: home
+  /password:
+    displayName: password
+    put:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                  "oldPass": "string",
+                  "newPass": "string"
+                }
+            }
+          example: '{}'
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+            '200':
+              body:
+                application/json:
+                  schema: |-
+                    {
+                        "tyep": "obejct",
+                        "properties": {
+                            "code": "number"
+                        }
+                    }
+  /userInfo:
+    displayName: userInfo
+    get:
+      headers:
+        token:
+          type: string
+          required: true
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                  "type": "object",
+                  "properties": {
+                      "code": "number",
+                      "data": {
+                          "type": "object",
+                          "properties": {
+                              "user": {
+                                  "type": "object",
+                                  "email": "string"
+                              }
+                          }
+                      }
+                  }
+                }
+
+
+
+
+
