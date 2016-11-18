@@ -6,19 +6,34 @@
   <script src="//cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
 </head>
 <body>
+<input type="text" id="input">
 <button id="btn">发送</button>
+
+<input type="text" id="input2">
+<button id="btn2">发送</button>
+
+
 <script>
   window.onload = function () {
     var btn = document.getElementById('btn');
-    var socket = io.connect("http://10.17.2.147:9000");
+    var input=document.getElementById("input");
+    var btn2 = document.getElementById('btn2');
+    var input2=document.getElementById("input2");
+
+    var baseUrl="http://localhost:9000";
+    var socket = io.connect(baseUrl);
     socket.on('connectSuccess', function (data) {
       console.log(data);
     })
+
     btn.onclick = function () {
-      socket.emit('test', {message: 'hello'})
-      socket.on('sendSucc',function (data) {
-        console.log(data);
-      })
+      var message=input.value;
+      socket.emit('message',{data:message});
+    }
+
+    btn2.onclick=function () {
+      var message=input2.value;
+      socket.emit('adminSay',{data:message});
     }
   }
 </script>
