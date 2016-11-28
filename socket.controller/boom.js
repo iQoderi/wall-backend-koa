@@ -13,10 +13,10 @@ const boomSocketController = (socket)=> {
     const token = data.token;
     const condition = {'token.token': token}
     User.findOne(condition).exec((err, user)=> {
-      console.log(user,3123123);
       if (user) {
         socket.emit(BOOM.AUTHSUCC);
         socket.on(BOOM.RECVMESSAGE,(data)=>{
+          console.log(data);
           socket.broadcast(BOOM.PULMESSAGE,{data:data.message})
         })
       } else {

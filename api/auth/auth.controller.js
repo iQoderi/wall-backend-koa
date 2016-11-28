@@ -94,7 +94,6 @@ exports.resendEmail = function *() {
   }
 }
 
-
 /**
  * 忘记密码
  */
@@ -109,7 +108,7 @@ exports.forgetPass = function *(next) {
     const condition = {id: id}
     const update = {token: token}
     yield User.update(condition, update);
-    this.body.request.token = token;
+    this.request.body.token = token;
     yield next;
   } else {
     this.body = {code: 10005}

@@ -8,7 +8,6 @@ const checkNull = function (data) {
     let isNull = data.every((each)=> {
       return !body[each];
     })
-    
     if (isNull) {
       this.body={code:10000}
     } else {
