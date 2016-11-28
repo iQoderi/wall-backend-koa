@@ -26,17 +26,17 @@ exports.register = function *(next) {
   } else {
     let id = uuid.v4();
     let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
-    let token=tokenCreator(id, expiresIn)
+    let token = tokenCreator(id, expiresIn)
     const condition = {
       id: id,
-      isActive:0,
+      isActive: 0,
       email: body.email,
-      password:body.password,
-      token:token
+      password: body.password,
+      token: token
     }
     const newUser = new User(condition, {_id: 0});
     yield newUser.save();
-    this.request.body.token=token;
+    this.request.body.token = token;
     yield next;
   }
 };
@@ -53,15 +53,15 @@ exports.login = function *() {
   };
   const user = yield User.findOne(condition, {_id: 0});
   if (user) {
-   if(user.isActive===1){
-     let id = user.id;
-     let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
-     const token = tokenCreator(id, expiresIn);
-     yield User.update(condition, {token: token});
-     this.body = {code: 0, data: {token: token}}
-   }else{
-     this.body={code:10002}
-   }
+    if (user.isActive === 1) {
+      let id = user.id;
+      let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+      const token = tokenCreator(id, expiresIn);
+      yield User.update(condition, {token: token});
+      this.body = {code: 0, data: {token: token}}
+    } else {
+      this.body = {code: 10002}
+    }
   } else {
     this.body = {
       code: 10001
@@ -69,3 +69,25 @@ exports.login = function *() {
   }
 };
 
+/**
+ * 重新发送邮件
+ */
+exports.resendEmail = function *() {
+  const body = this.request.body;
+  const condition = {email: body.email}
+  const user = yield User.findOne(condition);
+  if (user) {
+    if (user.isActive === 1) {
+      this.body = {code: 10006}
+    } else {
+      const id = user.id;
+      let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+      let token = tokenCreator(id, expiresIn);
+      yield User.update({token: token});
+      this.request.body.token = token;
+      yield next;
+    }
+  } else {
+    this.body = {code: 10005}
+  }
+}

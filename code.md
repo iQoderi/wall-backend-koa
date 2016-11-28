@@ -13,3 +13,5 @@ apiHost=http://10.17.0.147:9000
 |10002| User Count is Not Active |用户账户没有激活
 |10003| User exsite| 用户已经存在
 |10004| Email send Fail | 邮件发送失败
+|10005| User Not Exsit | 用户不存在
+|10006| User Is Active | 用户已经激活账户

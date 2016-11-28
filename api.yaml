@@ -1,7 +1,7 @@
 #%RAML 0.8
 title: WALL_API
 version: v1.0
-baseUri: 'http://api.wall.qoder.cn'
+baseUri: 'http://10.17.0.147:9000'
 documentation:
   - title: WALL_API
     content: |-
@@ -23,9 +23,6 @@ documentation:
                         "type":"string"
                     },
                     "password":{
-                        "type":"string"
-                    },
-                    "verifyCode":{
                         "type":"string"
                     }
                 }

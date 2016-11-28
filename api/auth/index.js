@@ -11,5 +11,6 @@ const regMailSender=require('../../middlewares/regMailSender');
 
 router.post('/login', checkNull(['email', 'password']), hashPassword, controller.login);
 router.post('/register', checkNull(['email', 'password']), hashPassword, controller.register,regMailSender);
+router.post('/resendEmail', checkNull(['email']),controller.resendEmail,regMailSender);
 
 module.exports = router;
