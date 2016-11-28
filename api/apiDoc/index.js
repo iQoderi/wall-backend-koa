@@ -6,13 +6,12 @@
 const router = require('koa-router')();
 const views=require('co-views');
 
-const render=views(__dirname+'/../../views',{
+const render=views(__dirname+'/../../',{
   map:{html:'ejs'}
 });
 
 router.get('/', function *() {
-  console.log('called')
-  this.body=yield render('api',{html:'13132'});
+  this.body=yield render('index');
 });
 
 module.exports = router;

@@ -14,6 +14,7 @@ const all={
       pass:'Qoder5143209'
     }
   },
+  email:'neuqstbysgl@163.com',
   host:'http://10.17.0.147:9000',
   //md5加密盐
   salt:'qoder123',

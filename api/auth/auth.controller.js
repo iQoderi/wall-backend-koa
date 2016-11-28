@@ -83,7 +83,9 @@ exports.resendEmail = function *() {
       const id = user.id;
       let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
       let token = tokenCreator(id, expiresIn);
-      yield User.update({token: token});
+      const condition = {id: id}
+      const update = {token: token};
+      yield User.update(condition, update);
       this.request.body.token = token;
       yield next;
     }
@@ -91,3 +93,26 @@ exports.resendEmail = function *() {
     this.body = {code: 10005}
   }
 }
+
+
+/**
+ * 忘记密码
+ */
+exports.forgetPass = function *(next) {
+  const body = this.request.body;
+  const condition = {email: body.email}
+  const user = yield User.findOne(condition);
+  if (user) {
+    const id = user.id;
+    let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+    let token = tokenCreator(id, expiresIn);
+    const condition = {id: id}
+    const update = {token: token}
+    yield User.update(condition, update);
+    this.body.request.token = token;
+    yield next;
+  } else {
+    this.body = {code: 10005}
+  }
+}
+

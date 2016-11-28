@@ -115,6 +115,30 @@ documentation:
                         "code": "number"
                     }
                 }
+  /forgetPass:
+    displayName: forgetPass
+    post:
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": "string"
+                }
+            }
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties":{
+                        "code": "number"
+                    }
+                }
+
 /home:
   displayName: home
   /password:

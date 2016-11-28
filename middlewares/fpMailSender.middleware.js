@@ -3,16 +3,16 @@
  */
 'use strict';
 const transporter = require('../util/email/transporter');
-const templateMaker = require('../util/mailTpl/register');
+const templateMaker = require('../util/mailTpl/forgetPass');
 const config = require('../config/env');
 
-const regMailSender = function *() {
+const fpMailSender = function *() {
   const body = this.request.body;
-  const subject = '东北大学秦皇岛分校数学与统计学院大学生就业择业平台';
-  const authLink = `${config.host}/users/register/confirmmail?token=${body.token.token}&email=${body.email}+&subject=${encodeURI(subject)}`;
+  const subject = '东北大学秦皇岛分校数学与统计学院科创实验室弹幕系统';
+  const authLink = `${config.host}/users/forgetPass/mail?token=${body.token.token}&email=${body.email}+&subject=${encodeURI(subject)}`;
   const html = templateMaker(authLink);
   const mailOptions = {
-    from: 'neuqstbysgl@163.com',
+    from:config.email,
     to: body.email,
     subject: subject,
     text: '欢迎使用东北大学秦皇岛分校数统科创实验室弹幕系统',
@@ -37,4 +37,4 @@ const regMailSender = function *() {
   }
 }
 
-module.exports = regMailSender;
+module.exports =fpMailSender;
