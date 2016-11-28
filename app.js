@@ -9,13 +9,11 @@ const ioController=require('./io');
 const config=require('./config/env');
 const app = koa();
 
-const host='127.0.0.1';
+const host=config.mongo.host;
 const db=mongoose.connect(`mongodb://${host}:27017/autoSubmitMailWork`);
 
 //mongodb promise style
 mongoose.Promise=require('bluebird');
-
-
 
 //error handle middleware
 app.use(errorHandleMiddle());

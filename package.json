@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "mocha"
   },
   "dependencies": {
@@ -36,7 +36,8 @@
     "uuid": "^2.0.3"
   },
   "devDependencies": {
-    "supertest": "^0.12.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "nodemon": "^1.11.0",
+    "supertest": "^0.12.1"
   }
 }

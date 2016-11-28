@@ -8,9 +8,10 @@ const all={
   port: process.env.PORT || 9000,
   //mongodb配置
   mongo: {
+    host:'127.0.0.1',
     options: {
-      user: process.env.MONGO_USERNAME || '',
-      pass: process.env.MONGO_PASSWORD || ''
+      user: 'root',
+      pass:'Qoder5143209'
     }
   },
   //md5加密盐
