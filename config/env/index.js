@@ -8,7 +8,7 @@ const all={
   port: process.env.PORT || 9000,
   //mongodb配置
   mongo: {
-    host:process.env.NODE_ENV==='dev'?'123.206.16.40':'127.0.0.1',
+    host:process.env.NODE_ENV!=='dev'?'123.206.16.40':'127.0.0.1',
     options: {
       user: 'qoder',
       pass:'qoder2016'
