@@ -150,8 +150,8 @@ documentation:
             {
                 "type": "object",
                 "properties": {
-                  "oldPass": "string",
-                  "newPass": "string"
+                  "oldPassword": "string",
+                  "password": "string"
                 }
             }
           example: '{}'
@@ -191,6 +191,7 @@ documentation:
                           "properties": {
                               "user": {
                                   "type": "object",
+                                  "id": "string",
                                   "email": "string"
                               }
                           }

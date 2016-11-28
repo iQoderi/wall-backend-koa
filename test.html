@@ -28,7 +28,7 @@
 
     btn.onclick = function () {
       var message=input.value;
-      socket.emit('message',{data:message});
+      socket.emit('token',{data:message});
     }
 
     btn2.onclick=function () {

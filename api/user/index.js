@@ -10,6 +10,6 @@ const checkActive=require('../../middlewares/checkActive');
 
 router.use(checkToken,checkActive);
 router.get('/info',controller.getUserInfo);
-router.post('/password',controller.resetPass);
+router.put('/password',controller.resetPass);
 
 module.exports=router;
