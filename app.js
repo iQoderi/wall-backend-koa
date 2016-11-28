@@ -10,7 +10,7 @@ const config=require('./config/env');
 const app = koa();
 
 const host=config.mongo.host;
-const db=mongoose.connect(`mongodb://${host}:27017/autoSubmitMailWork`);
+const db=mongoose.connect(`mongodb://${host}:27017/wall`);
 
 //mongodb promise style
 mongoose.Promise=require('bluebird');

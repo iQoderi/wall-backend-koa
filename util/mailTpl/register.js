@@ -23,7 +23,7 @@ const regTplMaker=(authLink)=>{
                 <tr>
                     <td class="banner-wrapper"
                         style="text-align: center; padding-top: 3%;color:#fff;height: 110px;background-color: #4ABA4F;font-size: 20px">
-                        东北大学秦皇岛分校大学生就业择业平台
+                        东北大学秦皇岛分校数统科创实验室弹幕系统
                     </td>
                 </tr>
 
@@ -38,7 +38,7 @@ const regTplMaker=(authLink)=>{
                                                           t="7">同学</span></strong>:
                                     </p>
                                     <p style="color: #888; font-size: 15px; font-weight: normal; line-height: 24px; margin: 0;">
-                                        欢迎使用东北大学秦皇岛分校大学生就业择业平台,请点击下面的链接激活账号或者复制下面的链接到浏览器打开:
+                                        欢迎使用东北大学秦皇岛分校数统科创实验室弹幕系统,请点击下面的链接激活账号或者复制下面的链接到浏览器打开:
                                     </p>
                                     <p style="color: #888; word-wrap: break-word;font-size: 15px; font-weight: normal; line-height: 24px; margin: 0;width:500px">
 					<a href=${authLink}>${authLink}</a>

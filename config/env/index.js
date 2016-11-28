@@ -14,6 +14,7 @@ const all={
       pass:'Qoder5143209'
     }
   },
+  host:'http://10.17.0.147',
   //md5加密盐
   salt:'qoder123',
   //token生成 secret,

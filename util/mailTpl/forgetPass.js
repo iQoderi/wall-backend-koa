@@ -7,7 +7,7 @@ const fpPassTplMaker=(authLink)=>{
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>东北大学秦皇岛分校大学生就业择业中心找回密码</title>
+    <title>东北大学秦皇岛分校数统科创实验室弹幕系统找回密码</title>
 </head>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#f3f3f3"

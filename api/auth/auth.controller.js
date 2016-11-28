@@ -16,7 +16,8 @@ const User = mongoose.model('User');
 /**
  * 注册
  */
-exports.register = function *() {
+exports.register = function *(next) {
+  console.log('called');
   const body = this.request.body;
   const user = yield User.findOne({email: body.email});
   if (user) {
@@ -26,21 +27,17 @@ exports.register = function *() {
   } else {
     let id = uuid.v4();
     let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+    let token=tokenCreator(id, expiresIn)
     const condition = {
       id: id,
       email: body.email,
       password: (md5(config.salt + body.password)),
-      token: tokenCreator(id, expiresIn)
-    };
+      token:token
+    }
     const newUser = new User(condition, {_id: 0});
-    const user=yield newUser.save();
-
-    // this.body = {
-    //   code: 0,
-    //   data: {
-    //     token: tokenCreator(id, expiresIn)
-    //   }
-    // }
+    yield newUser.save();
+    this.request.body.token=token;
+    yield next;
   }
 };
 
