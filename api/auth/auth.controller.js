@@ -17,7 +17,6 @@ const User = mongoose.model('User');
  * 注册
  */
 exports.register = function *(next) {
-  console.log('called');
   const body = this.request.body;
   const user = yield User.findOne({email: body.email});
   if (user) {
@@ -31,7 +30,7 @@ exports.register = function *(next) {
     const condition = {
       id: id,
       email: body.email,
-      password: (md5(config.salt + body.password)),
+      password:body.password,
       token:token
     }
     const newUser = new User(condition, {_id: 0});
@@ -47,7 +46,6 @@ exports.register = function *(next) {
  */
 exports.login = function *() {
   const body = this.request.body;
-  console.log(body);
   const condition = {
     email: body.email,
     password: body.password
