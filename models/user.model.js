@@ -19,6 +19,11 @@ let UserSchema = new Schema({
     required: true,
     type: String
   },
+  isActive:{
+    required:true,
+    type:Number,
+    default:0     //0 激活  //1 没有激活
+  },
   token: {
     createAt: String,
     token: String,

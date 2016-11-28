@@ -29,6 +29,7 @@ exports.register = function *(next) {
     let token=tokenCreator(id, expiresIn)
     const condition = {
       id: id,
+      isActive:0,
       email: body.email,
       password:body.password,
       token:token
@@ -52,11 +53,15 @@ exports.login = function *() {
   };
   const user = yield User.findOne(condition, {_id: 0});
   if (user) {
-    let id = user.id;
-    let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
-    const token = tokenCreator(id, expiresIn);
-    yield User.update(condition, {token: token});
-    this.body = {code: 0, data: {token: token}}
+   if(user.isActive===1){
+     let id = user.id;
+     let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+     const token = tokenCreator(id, expiresIn);
+     yield User.update(condition, {token: token});
+     this.body = {code: 0, data: {token: token}}
+   }else{
+     this.body={code:10002}
+   }
   } else {
     this.body = {
       code: 10001
