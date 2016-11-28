@@ -3,8 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
+    "start":"better-npm-run  dev",
+    "start:watch": "better-npm-run  dev:watch",
     "test": "mocha"
+  },
+  "betterScripts": {
+    "dev:watch": {
+      "command": "nodemon app.js",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    },
+    "dev": {
+      "command": "node app.js",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    }
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -36,6 +51,7 @@
     "uuid": "^2.0.3"
   },
   "devDependencies": {
+    "better-npm-run": "0.0.13",
     "mocha": "^2.4.5",
     "nodemon": "^1.11.0",
     "supertest": "^0.12.1"

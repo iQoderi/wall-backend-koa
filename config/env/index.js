@@ -8,14 +8,14 @@ const all={
   port: process.env.PORT || 9000,
   //mongodb配置
   mongo: {
-    host:'127.0.0.1',
+    host:process.env.NODE_ENV!=='dev'?'123.206.16.40':'127.0.0.1',
     options: {
-      user: 'root',
-      pass:'Qoder5143209'
+      user: 'qoder',
+      pass:'qoder2016'
     }
   },
   email:'neuqstbysgl@163.com',
-  host:'http://10.17.0.147:9000',
+  host:process.env.NODE_ENV!=='dev'?'http://api.wall.qoder.cn':'http://127.0.0.1:9000',
   //md5加密盐
   salt:'qoder123',
   //token生成 secret,

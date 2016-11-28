@@ -2,20 +2,20 @@
  * Created by qoder on 16-11-28.
  */
 'use strict';
-const msgType={
-  BOOM:{
-    TOKEN:'TOKEN',
-    AUTHSUCC:'AUTHSUCC',
-    AUTHFAIL:'AUTHFAIL',
-    RECVMESSAGE:'RECVMESSAGE',
-    PULMESSAGE:'PULMESSAGE'
+const msgType = {
+  BOOM: {
+    TOKEN: 'TOKEN',
+    AUTHSUCC: 'AUTHSUCC',
+    AUTHFAIL: 'AUTHFAIL',
+    RECVMESSAGE: 'RECVMESSAGE',
+    PULMESSAGE: 'PULMESSAGE'
   },
-  WALL:{
+  WALL: {
 
   },
-  ADMIN:{
+  ADMIN: {
 
   }
 }
 
-module.exports=msgType;
+module.exports = msgType;

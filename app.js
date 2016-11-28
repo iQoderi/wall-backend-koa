@@ -9,8 +9,26 @@ const ioController=require('./io');
 const config=require('./config/env');
 const app = koa();
 
+
 const host=config.mongo.host;
-const db=mongoose.connect(`mongodb://${host}:27017/wall`);
+const dbOptions = {
+  user: config.mongo.user,
+  pass: config.mongo.pass
+}
+
+const db=mongoose.connect(`mongodb://${host}:27017/wall`,dbOptions);
+
+mongoose.connection.on('connected', function () {
+  console.log('Mongoose connected to ');
+})
+
+mongoose.connection.on('error', function (err) {
+  console.log('Mongoose connection error: ' + err);
+})
+
+mongoose.connection.on('disconnected', function () {
+  console.log('Mongoose disconnected');
+})
 
 //mongodb promise style
 mongoose.Promise=require('bluebird');
