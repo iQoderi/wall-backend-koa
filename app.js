@@ -12,8 +12,8 @@ const app = koa();
 
 const host=config.mongo.host;
 const dbOptions = {
-  user: config.mongo.user,
-  pass: config.mongo.pass
+  user: config.mongo.options.user,
+  pass: config.mongo.options.pass
 }
 
 const db=mongoose.connect(`mongodb://${host}:27017/wall`,dbOptions);
