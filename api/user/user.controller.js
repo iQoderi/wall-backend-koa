@@ -5,6 +5,7 @@
 
 const mongoose=require('mongoose');
 const userModel=require('../../models/user.model');
+const hash=require('../../util/hash');
 const User=mongoose.model('User');
 
 /**
@@ -13,7 +14,7 @@ const User=mongoose.model('User');
 exports.getUserInfo=function *() {
   const user={
     id:this.user.id,
-    username:this.user.username
+    email:this.user.email
   };
   this.body={
     code:0,
@@ -21,12 +22,26 @@ exports.getUserInfo=function *() {
       user:user
     }
   }
-};
+}
 
 /**
- * 删除用户
+ * 用户修改密码
  */
-exports.rmUser=function *() {
-  const condition={id:this.parmas.id};
-  const user=User.delete(condition);
-};
+exports.resetPass=function *() {
+  const body=this.request.body;
+  const user=this.user;
+  body.oldPassword=hash(user.email,body.oldPassword);
+  if(user.password!==body.oldPassword){
+    this.body={code:10009}
+  }else{
+    const password=hash(user.email,body.password);
+    const condition={id:user.id};
+    const update={password:password}
+    const result=yield  User.update(condition,update);
+    if(result.ok!=0){
+      this.body={code:0}
+    }else{
+      this.body={code:10010}
+    }
+  }
+}

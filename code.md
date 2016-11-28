@@ -15,3 +15,8 @@
 |10004| Email send Fail | 邮件发送失败
 |10005| User Not Exsit | 用户不存在
 |10006| User Is Active | 用户已经激活账户
+|10007| Login Expires | 登录过期
+|10008| Login Expires | token错误或者过期
+|10009| Old Password Error | 旧密码错误
+|10010| Update Password Fail  | 修改密码失败
+

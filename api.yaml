@@ -139,8 +139,8 @@ documentation:
                     }
                 }
 
-/home:
-  displayName: home
+/user:
+  displayName: user
   /password:
     displayName: password
     put:
@@ -170,8 +170,8 @@ documentation:
                             "code": "number"
                         }
                     }
-  /userInfo:
-    displayName: userInfo
+  /info:
+    displayName: info
     get:
       headers:
         token:

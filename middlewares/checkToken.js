@@ -4,7 +4,7 @@
 'use strict';
 
 const mongoose=require('mongoose');
-const userModel=require('../../models/user.model');
+const userModel=require('../models/user.model.js');
 const User=mongoose.model('User');
 
 function *checkToken(next) {
@@ -25,7 +25,7 @@ function *checkToken(next) {
     }
   }else{
     this.body={
-      code:10005
+      code:10008
     }
   }
 }
