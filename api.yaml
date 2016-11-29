@@ -201,6 +201,49 @@ documentation:
                   }
                 }
 
+/admin:
+  displayName: admin
+  /login:
+    displayName: login
+    post:
+      body:
+              application/json:
+                schema: |-
+                  {
+                      "type":"object",
+                      "properties": {
+                          "email":{
+                              "type":"string"
+                          },
+                          "password":{
+                              "type":"string"
+                          }
+                      }
+                  }
+                example: '{}'
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                  "type": "object",
+                  "properties": {
+                      "code": "number",
+                      "data": {
+                          "type": "object",
+                          "properties": {
+                              "token": {
+                                  "type": "object",
+                                  "createAt": "string",
+                                  "token": "string",
+                                  "expiresIn": "string"
+                              }
+                          }
+                      }
+                  }
+                }
+
 
 
 
