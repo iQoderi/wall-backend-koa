@@ -5,7 +5,7 @@
 
 const all={
   env: process.env.NODE_ENV,
-  port: 9001,
+  port: process.env.NODE_ENV==='dev'?9001:9000,
   //mongodb配置
   mongo: {
     host:process.env.NODE_ENV!=='dev'?'123.206.16.40':'127.0.0.1',
