@@ -15,7 +15,7 @@ const all={
     }
   },
   email:'18716037958@163.com',
-  host:process.env.NODE_ENV!=='dev'?'http://api.wall.qoder.cn':'http://10.47.0.147:9001',
+  host:process.env.NODE_ENV!=='dev'?'http://api.wall.qoder.cn':'http://10.17.0.147:9001',
   //md5加密盐
   salt:'qoder123',
   //token生成 secret,

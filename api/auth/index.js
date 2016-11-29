@@ -15,6 +15,6 @@ router.post('/login', checkNull(['email', 'password']), hashPassword, controller
 router.post('/register', checkNull(['email', 'nickname','password']), hashPassword, controller.register,regMailSender);
 router.post('/reSendEmail', checkNull(['email']),controller.resendEmail,regMailSender);
 router.post('/forgetPass', checkNull(['email']),controller.forgetPass,fpMailSender);
-router.post('/resetPass', checkToken,checkNull(['password']),controller.resetPass);
+router.put('/resetPass', checkToken,checkNull(['password']),controller.resetPass);
 
 module.exports = router;

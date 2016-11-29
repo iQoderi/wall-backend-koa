@@ -20,4 +20,5 @@
 |10008| Login Expires | token错误或者过期
 |10009| Old Password Error | 旧密码错误
 |10010| Update Password Fail  | 修改密码失败
+|10011| User Not Has Role  | 用户没有权限
 

@@ -141,7 +141,7 @@ documentation:
                 }
   /resetPass:
     displayName: resetPass
-    post:
+    put:
       headers:
         token:
           type: string
@@ -270,8 +270,99 @@ documentation:
                       }
                   }
                 }
-
-
-
-
-
+  /subAdmin:
+      displayName: subAdmin
+      get:
+        headers:
+          token:
+            type: string
+            required: true
+        responses:
+          '200':
+            body:
+              application/json:
+                schema: |-
+                  {
+                    "type": "object",
+                    "properties": {
+                        "code": "number",
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "subAdmin": {
+                                    "type": "array",
+                                    "id": "string",
+                                    "email": "string"
+                                }
+                            }
+                        }
+                    }
+                  }
+      post:
+            headers:
+                    token:
+                      type: string
+                      required: true
+            body:
+                    application/json:
+                      schema: |-
+                        {
+                            "type":"object",
+                            "properties": {
+                                "email":{
+                                    "type":"string"
+                                },
+                                "password":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                      example: '{}'
+            responses:
+              '200':
+                body:
+                  application/json:
+                    schema: |-
+                      {
+                        "type": "object",
+                        "properties": {
+                            "code": "number",
+                            "data": {
+                                "type": "object",
+                                "properties": {
+                                    "token": {
+                                        "type": "object",
+                                        "createAt": "string",
+                                        "token": "string",
+                                        "expiresIn": "string"
+                                    }
+                                }
+                            }
+                        }
+                      }
+      '/{id}':
+            displayName: '{id}'
+            uriParameters:
+              id:
+                type: string
+            delete:
+                    headers:
+                              token:
+                                type: string
+                                required: true
+                    responses:
+                      '200':
+                        body:
+                          application/json:
+                            schema: |-
+                              {
+                                  "type": "object",
+                                  "properties": {
+                                      "code": {
+                                          "type": "number"
+                                      }
+                                  },
+                                  "required": [
+                                      "code"
+                                  ]
+                              }
