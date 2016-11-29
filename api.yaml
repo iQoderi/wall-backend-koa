@@ -139,6 +139,33 @@ documentation:
                         "code": "number"
                     }
                 }
+  /resetPass:
+    displayName: resetPass
+    post:
+      headers:
+        token:
+          type: string
+          required: true
+      body:
+        application/json:
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "password": "string"
+                }
+            }
+      responses:
+        '200':
+          body:
+            application/json:
+              schema: |-
+                {
+                    "type": "object",
+                    "properties":{
+                        "code": "number"
+                    }
+                }
 
 /user:
   displayName: user

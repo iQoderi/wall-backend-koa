@@ -10,6 +10,7 @@ const config = require('../../config/env');
 const UserModel = require('../../models/user.model');
 const md5 = require('md5');
 const tokenCreator = require('../../util/token');
+const hash=require('../../util/hash');
 const User = mongoose.model('User');
 
 
@@ -32,7 +33,7 @@ exports.register = function *(next) {
       isActive: 0,
       email: body.email,
       password: body.password,
-      nickname:body.nickname,
+      nickname: body.nickname,
       token: token
     }
     const newUser = new User(condition, {_id: 0});
@@ -104,7 +105,7 @@ exports.forgetPass = function *(next) {
   const user = yield User.findOne(condition);
   if (user) {
     const id = user.id;
-    const  expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+    const expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
     const token = tokenCreator(id, expiresIn);
     const condition = {id: id}
     const update = {token: token}
@@ -116,3 +117,22 @@ exports.forgetPass = function *(next) {
   }
 }
 
+/**
+ * 忘记密码/重置密码
+ * @param next
+ */
+exports.resetPass = function *(next) {
+  const body=this.request.body;
+  const user=this.user;
+  const condition={
+    id:user.id
+  }
+
+  body.password=hash(user.email,body.password);
+  const update={
+    password:body.password
+  }
+
+  yield User.update(condition,update)
+  this.body={code:0}
+}
