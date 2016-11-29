@@ -15,14 +15,19 @@ let UserSchema = new Schema({
     required: true,
     type: String
   },
+  nickname: {
+    required: true,
+    type: String,
+    default: ''
+  },
   password: {
     required: true,
     type: String
   },
-  isActive:{
-    required:true,
-    type:Number,
-    default:0     //0 激活  //1 没有激活
+  isActive: {
+    required: true,
+    type: Number,
+    default: 0     //0 激活  //1 没有激活
   },
   token: {
     createAt: String,

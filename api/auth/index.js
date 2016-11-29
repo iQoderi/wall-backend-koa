@@ -11,7 +11,7 @@ const regMailSender=require('../../middlewares/regMailSender.middleware');
 const fpMailSender=require('../../middlewares/fpMailSender.middleware');
 
 router.post('/login', checkNull(['email', 'password']), hashPassword, controller.login);
-router.post('/register', checkNull(['email', 'password']), hashPassword, controller.register,regMailSender);
+router.post('/register', checkNull(['email', 'nickname','password']), hashPassword, controller.register,regMailSender);
 router.post('/reSendEmail', checkNull(['email']),controller.resendEmail,regMailSender);
 router.post('/forgetPass', checkNull(['email']),controller.forgetPass,fpMailSender);
 

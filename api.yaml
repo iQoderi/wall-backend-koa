@@ -68,6 +68,7 @@ documentation:
                 "type": "object",
                  "properties": {
                     "email": "string",
+                    "nickname": "string",
                     "password": "string"
                  }
             }
@@ -192,7 +193,8 @@ documentation:
                               "user": {
                                   "type": "object",
                                   "id": "string",
-                                  "email": "string"
+                                  "email": "string",
+                                  "nickname": "string"
                               }
                           }
                       }

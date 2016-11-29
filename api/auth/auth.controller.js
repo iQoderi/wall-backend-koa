@@ -24,14 +24,15 @@ exports.register = function *(next) {
       code: 10003
     };
   } else {
-    let id = uuid.v4();
-    let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
-    let token = tokenCreator(id, expiresIn)
+    const id = uuid.v4();
+    const expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+    const token = tokenCreator(id, expiresIn)
     const condition = {
       id: id,
       isActive: 0,
       email: body.email,
       password: body.password,
+      nickname:body.nickname,
       token: token
     }
     const newUser = new User(condition, {_id: 0});
@@ -54,8 +55,8 @@ exports.login = function *() {
   const user = yield User.findOne(condition, {_id: 0});
   if (user) {
     if (user.isActive === 1) {
-      let id = user.id;
-      let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+      const id = user.id;
+      const expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
       const token = tokenCreator(id, expiresIn);
       yield User.update(condition, {token: token});
       this.body = {code: 0, data: {token: token}}
@@ -72,7 +73,7 @@ exports.login = function *() {
 /**
  * 重新发送邮件
  */
-exports.resendEmail = function *() {
+exports.resendEmail = function *(next) {
   const body = this.request.body;
   const condition = {email: body.email}
   const user = yield User.findOne(condition);
@@ -81,8 +82,8 @@ exports.resendEmail = function *() {
       this.body = {code: 10006}
     } else {
       const id = user.id;
-      let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
-      let token = tokenCreator(id, expiresIn);
+      const expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+      const token = tokenCreator(id, expiresIn);
       const condition = {id: id}
       const update = {token: token};
       yield User.update(condition, update);
@@ -103,8 +104,8 @@ exports.forgetPass = function *(next) {
   const user = yield User.findOne(condition);
   if (user) {
     const id = user.id;
-    let expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
-    let token = tokenCreator(id, expiresIn);
+    const  expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
+    const token = tokenCreator(id, expiresIn);
     const condition = {id: id}
     const update = {token: token}
     yield User.update(condition, update);

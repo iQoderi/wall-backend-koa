@@ -14,7 +14,8 @@ const User=mongoose.model('User');
 exports.getUserInfo=function *() {
   const user={
     id:this.user.id,
-    email:this.user.email
+    email:this.user.email,
+    nickname:this.user.nickname
   };
   this.body={
     code:0,
