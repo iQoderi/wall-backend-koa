@@ -1,10 +1,4 @@
-/**
- * Created by qoder on 16-11-28.
- */
-'use strict';
-const regTplMaker=(authLink)=>{
-  const regHtml=`
-  
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,7 +205,7 @@ const regTplMaker=(authLink)=>{
                                                                         font-size:1px;
                                                                     border-radius:4px;
                                                                     line-height:18px;">
-                                    <a href=${authLink} target="_blank"
+                                    <a href="/" target="_blank"
                                        style="text-decoration:none;
                                                                            margin:0;
                                                                        font-family:'Helvetica Neue',
@@ -311,9 +305,3 @@ const regTplMaker=(authLink)=>{
   </tbody>
 </table>
 </html>
-
-`
-  return regHtml;
-}
-
-module.exports=regTplMaker;

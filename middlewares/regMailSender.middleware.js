@@ -9,7 +9,7 @@ const config = require('../config/env');
 const regMailSender = function *() {
   const body = this.request.body;
   const subject = '东北大学秦皇岛分校数学与统计学院科创实验室弹幕系统';
-  const authLink = `${config.host}/users/register/mail?token=${body.token.token}&email=${body.email}+&subject=${encodeURI(subject)}`;
+  const authLink = `${config.host}/mail/register?token=${body.token.token}&email=${body.email}+&subject=${encodeURI(subject)}`;
   const html = templateMaker(authLink);
   const mailOptions = {
     from:config.email,

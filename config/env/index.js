@@ -14,8 +14,8 @@ const all={
       pass:'qoder2016'
     }
   },
-  email:'neuqstbysgl@163.com',
-  host:process.env.NODE_ENV!=='dev'?'http://api.wall.qoder.cn':'http://127.0.0.1:9000',
+  email:'18716037958@163.com',
+  host:process.env.NODE_ENV!=='dev'?'http://api.wall.qoder.cn':'http://10.47.0.147:9001',
   //md5加密盐
   salt:'qoder123',
   //token生成 secret,

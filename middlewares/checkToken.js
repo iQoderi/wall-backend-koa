@@ -9,9 +9,10 @@ const User=mongoose.model('User');
 
 function *checkToken(next) {
   const token=this.request.header.token||this.query.token;
+  console.log(token);
   const condition={
     "token.token":token
-  };
+  }
   const user=yield User.findOne(condition);
   if(user){
     const now=Date.now();
