@@ -27,9 +27,9 @@ exports.register = function *() {
 }
 
 exports.forgetPass = function *() {
+  console.log('called');
   const mail = this.user.email;
   const token = this.query.token;
-  console.log(token)
   this.body = yield render('resetPass', {__mail__: mail, token: token});
 }
 

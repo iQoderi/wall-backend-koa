@@ -311,7 +311,6 @@ const regTplMaker=(authLink)=>{
   </tbody>
 </table>
 </html>
-
 `
   return regHtml;
 }
