@@ -9,18 +9,21 @@ const TYPE = require('../config/socket/messageType');
 
 const boomSocketController = (socket)=> {
   const BOOM = TYPE.BOOM;
-  socket.on(BOOM.TOKEN, (data)=> {
+  const COMMON = TYPE.COMMON;
+  const SERVER = TYPE.SERVER;
+  socket.on(COMMON.TOKEN, (data)=> {
     const token = data.token;
     const condition = {'token.token': token}
     User.findOne(condition).exec((err, user)=> {
       if (user) {
-        socket.emit(BOOM.AUTHSUCC);
-        socket.on(BOOM.RECVMESSAGE,(data)=>{
-          console.log(data);
+        socket.emit(SERVER.AUTHSUCC,()=>{
+          console.log(13213)
+        });
+        socket.on(SERVER.RECVMESSAGE,(data)=>{
           socket.broadcast(BOOM.PULMESSAGE,{data:data.message})
         })
       } else {
-        socket.emit(BOOM.AUTHFAIL);
+        socket.emit(SERVER.AUTHFAIL);
       }
     });
   })

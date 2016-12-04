@@ -26,6 +26,11 @@ let adminSchema = new Schema({
   password: {
     required: true,
     type: String
+  },
+  token: {
+    createAt: String,
+    token: String,
+    expiresIn: String
   }
 })
 

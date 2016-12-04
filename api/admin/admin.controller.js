@@ -24,6 +24,7 @@ exports.login = function *(next) {
     const id = admin.id;
     const expiresIn = 1000 * 60 * 60 * 24 * 7;   //7天过期
     const token = tokenCreator(id, expiresIn);
+    yield Admin.update({id: id}, {token: token});
     this.body = {code: 0, data: {token: token}}
   } else {
     this.body = {code: 10001}
@@ -36,11 +37,13 @@ exports.login = function *(next) {
 exports.addSubAdmin = function *() {
   const user = this.user;
   const body = this.request.body;
+  const id = uuid.v1();
   const condition = {
     email: body.email,
     password: body.password,
     role: 0,
-    adminId: user.id
+    adminId: user.id,
+    id: id
   }
 
   const SubAdmin = new Admin(condition, {_id: 0})
@@ -55,9 +58,10 @@ exports.addSubAdmin = function *() {
 exports.getSubAdmin = function *() {
   const user = this.user;
   const condition = {
-    id: user.id
+    adminId: user.id,
+    role: 0
   }
-  const admins = yield Admin.find(condition, {password: 0, _id: 0, email: 1, id: 1});
+  const admins = yield Admin.find(condition, {password: 0, _id: 0, token: 0, __v: 0});
   this.body = {code: 0, data: {subAdmin: admins}}
 }
 
@@ -69,7 +73,7 @@ exports.rmSubAdmin = function *() {
   const condition = {
     id: this.params.id
   }
-  const info=yield Admin.delete(condition);
+  const info = yield Admin.delete(condition);
   console.log(info);
   this.body = {code: 0}
 }

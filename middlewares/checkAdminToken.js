@@ -1,18 +1,18 @@
 /**
- * Created by qoder on 16-10-11.
+ * Created by qoder on 16-12-4.
  */
 'use strict';
-
 const mongoose=require('mongoose');
-const userModel=require('../models/user.model.js');
-const User=mongoose.model('User');
+const adminModel=require('../models/admin.model');
+const Admin=mongoose.model('Admin');
 
-function *checkToken(next) {
+function *checkAdminToken(next) {
   const token=this.request.header.token||this.query.token;
   const condition={
     "token.token":token
   }
-  const user=yield User.findOne(condition);
+
+  const user=yield Admin.findOne(condition);
   if(user){
     const now=Date.now();
     if(now<=user.token.expiresIn){
@@ -30,4 +30,4 @@ function *checkToken(next) {
   }
 }
 
-module.exports=checkToken;
+module.exports=checkAdminToken;

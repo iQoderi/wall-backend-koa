@@ -6,12 +6,12 @@ const router = require('koa-router')();
 const controller = require('./admin.controller');
 const hashPassword = require('../../middlewares/hashPassword.middleware');
 const checkNull = require('../../middlewares/checkNull.middleware');
-const checkToken = require('../../middlewares/checkToken');
+const checkToken = require('../../middlewares/checkAdminToken');
 const hashRole = require('../../middlewares/hasRole.middleware');
 
 router.post('/login', hashPassword, controller.login);
-router.get('/subAdmin', checkNull, hashRole(1), checkToken, controller.getSubAdmin);
-router.post('/subAdmin', checkNull, hashRole(1), checkToken, hashPassword, controller.addSubAdmin);
-router.delete('/subAdmin/:id', checkNull, hashRole(1), checkToken, controller.rmSubAdmin);
+router.get('/subAdmin',checkToken, hashRole(1), controller.getSubAdmin);
+router.post('/subAdmin', checkNull(['email','password']), checkToken,hashRole(1), hashPassword, controller.addSubAdmin);
+router.delete('/subAdmin/:id', checkToken,hashRole(1), controller.rmSubAdmin);
 
 module.exports = router;
