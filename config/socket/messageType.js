@@ -20,7 +20,8 @@ const msgType = {
     PULMESSAGE: 'ADMINPULMESSAGE',   //管理员审核通过上墙消息
     REDOMESSAGE: 'ADMINREDOMESSAGE',    //管理员撤回消息
     SHIELDUSER: 'SHIELDUSER',              //管理员拉黑用户
-    REDOSHIELDUSER: 'REDOSHIDLDUSER'     //管理员撤销拉黑用户
+    REDOSHIELDUSER: 'REDOSHIDLDUSER',     //管理员撤销拉黑用户
+    PULWALL: 'ADMINPULWALL'     //管理员上墙
   },
   SERVER: {
     AUTHSUCC: 'AUTHSUCC',  //客户端验证通过
@@ -39,7 +40,7 @@ const msgType = {
 
     PULWALLMESSAGE: 'PULWALLMESSAGE',   //向墙端广播上墙消息
     REDOWALLMESSAGE: 'REDOWALLMESSAGE',    //向墙端广播撤回消息
-
+    PULADMINWALLTOWALL: 'PULADMINWALLTOWALL'   //向墙端广播管理员上墙消息
   }
 }
 

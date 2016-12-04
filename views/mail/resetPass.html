@@ -5,49 +5,57 @@
   <title>Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <style>
-    .content{
-      margin:0;
-      padding:0;
-      clear:both;
+    .content {
+      margin: 0;
+      padding: 0;
+      clear: both;
     }
-    .top{
-      width:180px;
-      height:180px;
-      margin:20px auto;
+
+    .top {
+      width: 180px;
+      height: 180px;
+      margin: 20px auto;
     }
-    .middle{
-      min-width:60%;
-      height:400px;
-      margin:20px auto;
+
+    .middle {
+      min-width: 60%;
+      height: 400px;
+      margin: 20px auto;
     }
-    .user{
-      width:230px;
-      height:80px;
-      margin:0 auto;
+
+    .user {
+      width: 230px;
+      height: 80px;
+      margin: 0 auto;
       text-align: center;
     }
-    .user h1{
-      width:30px;
-      height:30px;
-      line-height:30px;
-      font-size:30px;
-      margin:0 auto;
+
+    .user h1 {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 30px;
+      margin: 0 auto;
     }
-    .user span{
-      font-size:19px;
-      color:#2db7f5;
+
+    .user span {
+      font-size: 19px;
+      color: #2db7f5;
     }
-    .link{
-      width:100%;
-      height:100px;
+
+    .link {
+      width: 100%;
+      height: 100px;
       text-align: center;
-      margin:38px auto;
+      margin: 38px auto;
     }
-    .link span{
-      color:#666;
+
+    .link span {
+      color: #666;
     }
-    #goBack{
-      color:#2db7f5;
+
+    #goBack {
+      color: #2db7f5;
     }
   </style>
 </head>
@@ -70,23 +78,23 @@
 </div>
 <script>
   window.onload = function () {
-    var count= 5;
-    var token=document.getElementById("token").innerText;
-    var goBack= document.getElementById('goBack');
+    var count = 5;
+    var token = document.getElementById("token").innerText;
+    var goBack = document.getElementById('goBack');
     var url = 'http://127.0.0.1:8080';
-    var targetPath="/#/auth/resetPass?token="+token;
-    goBack.setAttribute('href',url+targetPath);
-    var time=document.getElementById('time');
-    var timer=setInterval(function(){
-      time.innerText=count--;
-      if(count===0){
+    var targetPath = "/?token=" + token + "#/auth/resetPass";
+    goBack.setAttribute('href', url + targetPath);
+    var time = document.getElementById('time');
+    var timer = setInterval(function () {
+      time.innerText = count--;
+      if (count === 0) {
         clearInterval(timer);
-        window.location.href=url+targetPath;
+        window.location.href = url + targetPath;
       }
-    },1000);
-    goBack.onclick=function () {
+    }, 1000);
+    goBack.onclick = function () {
       clearInterval(timer);
-      window.location.href=url+targetPath;
+      window.location.href = url + targetPath;
     }
   }
 </script>

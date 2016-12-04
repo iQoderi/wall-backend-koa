@@ -25,6 +25,7 @@ const wallController = (socket)=> {
           const copyData = data;
           copyData.id = uuid.v1();
           copyData.userId = user.id;
+          copyData.nickname = user.nickname;
           // const walls = new Wall(copyData);
           socket.broadcast.emit(SERVER.PULWALLMESSAGETOADMIN, copyData)
           // walls.save(()=> {

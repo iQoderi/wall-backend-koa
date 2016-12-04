@@ -20,11 +20,14 @@ const adminSocketController = (socket)=> {
       if (admin) {
         socket.emit(SERVER.ADMINAUTHSUCC);
         socket.on(ADMIN.PULMESSAGE, (data)=> {
-          socket.broadcast.emit('pulMess',data);
+          socket.broadcast.emit('pulMess', data);
         })
       } else {
         socket.emit(SERVER.ADMINAUTHFAIL);
       }
+    })
+    socket.on(ADMIN.PULWALL, (data)=> {
+      socket.broadcast.emit(ADMIN.PULADMINWALLTOWALL, data)
     })
   })
 }
