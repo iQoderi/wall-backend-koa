@@ -27,8 +27,8 @@ const msgType = {
     AUTHSUCC: 'AUTHSUCC',  //客户端验证通过
     AUTHFAIL: 'AUTHFAIL', //客户端验证失败
     PULBOOMMESSAGE: 'PULBOOMMESSAGE',     //向客户端广播弹幕
+    PULBOOMSELF:'PULBOOMSELF',    //向客户端推送自己发送的消息
     WALLMESSAGESUCCESS: 'WALLMESSAGESUCCESS',  //向客户端发送上墙消息接收成功
-
 
     ADMINAUTHSUCC: 'ADMINAUTHSUCC',   //管理员验证通过
     ADMINAUTHFAIL: 'ADMINAUTHFAIL',    //管理员验证失败
