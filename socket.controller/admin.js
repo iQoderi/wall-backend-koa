@@ -27,7 +27,7 @@ const adminSocketController = (socket)=> {
       }
     })
     socket.on(ADMIN.PULWALL, (data)=> {
-      socket.broadcast.emit(ADMIN.PULADMINWALLTOWALL, data)
+      socket.broadcast.emit(SERVER.PULADMINWALLTOWALL, data)
     })
   })
 }

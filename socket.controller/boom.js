@@ -11,16 +11,24 @@ const boomSocketController = (socket)=> {
   const BOOM = TYPE.BOOM;
   const COMMON = TYPE.COMMON;
   const SERVER = TYPE.SERVER;
-  socket.on(COMMON.TOKEN, (data)=> {
+  socket.on(BOOM.TOKEN, (data)=> {
     const token = data.token;
     const condition = {'token.token': token}
+    console.log('deafaefeaf',BOOM.RECVMESSAGE);
     User.findOne(condition).exec((err, user)=> {
       if (user) {
-        socket.emit(SERVER.AUTHSUCC,()=>{
+        socket.emit(SERVER.AUTHSUCC, ()=> {
           console.log(13213)
         });
-        socket.on(SERVER.RECVMESSAGE,(data)=>{
-          socket.broadcast(BOOM.PULMESSAGE,{data:data.message})
+        socket.on(BOOM.RECVMESSAGE, (data)=> {
+          console.log(user);
+          console.log(data,'dwadad');
+          let copyData=data;
+          copyData.userId=user.id;
+          copyData.nickname=user.nickname;
+          copyData.email=user.email;
+          copyData.isActive=user.isActive;
+          socket.broadcast.emit(SERVER.PULBOOMMESSAGE,copyData)
         })
       } else {
         socket.emit(SERVER.AUTHFAIL);
