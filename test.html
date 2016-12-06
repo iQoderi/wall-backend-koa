@@ -20,7 +20,7 @@
     var btn2 = document.getElementById('btn2');
     var input2=document.getElementById("input2");
 
-    var baseUrl="http://localhost:9001";
+    var baseUrl="http://api.wall.qoder.cn";
     var socket = io.connect(baseUrl);
     socket.on('connectSuccess', function (data) {
       console.log(data);

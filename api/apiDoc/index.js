@@ -11,7 +11,7 @@ const render=views(__dirname+'/../../',{
 });
 
 router.get('/', function *() {
-  this.body=yield render('index');
+  this.body=yield render('test');
 });
 
 module.exports = router;
