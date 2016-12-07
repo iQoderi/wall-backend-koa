@@ -34,6 +34,7 @@ exports.register = function *(next) {
       email: body.email,
       password: body.password,
       nickname: body.nickname,
+      isBlock:0,
       token: token
     }
     const newUser = new User(condition, {_id: 0});

@@ -4,8 +4,10 @@
 'use strict';
 const mongoose = require('mongoose');
 const adminModel = require('../../models/admin.model');
+const userModel = require('../../models/user.model');
 const tokenCreator = require('../../util/token');
 const Admin = mongoose.model('Admin');
+const User = mongoose.model('User');
 const uuid = require('uuid');
 
 /**
@@ -73,11 +75,46 @@ exports.rmSubAdmin = function *() {
   const condition = {
     id: this.params.id
   }
-  const info = yield Admin.delete(condition);
-  console.log(info);
+  console.log(condition);
+  yield Admin.remove(condition);
   this.body = {code: 0}
 }
 
 
+/**
+ * 拉黑用户
+ */
+exports.blockUsers = function *() {
+  const condition = {
+    id: this.params.id
+  }
+  const users = yield User.findOne(condition)
+  const update = {isBlock: 1}
+  yield User.update(condition, update)
+  this.body = {code: 0}
+}
 
+/**
+ * 撤销拉黑用户
+ */
+exports.redoBlockUser = function *() {
+  const condition = {
+    id: this.params.id
+  }
 
+  const update = {isBlock: 0}
+  const info = yield User.update(condition, update);
+  this.body = {code: 0}
+}
+
+/**
+ * 获取拉黑用户列表
+ */
+exports.getBlockUsers = function *() {
+  const condition = {
+    isBlock: 1
+  }
+  const users = yield User.find(condition)
+  console.log(users);
+  this.body = {code: 0, data: {users: users}}
+}
