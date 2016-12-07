@@ -16,18 +16,26 @@ const adminSocketController = (socket)=> {
   const ADMIN = TYPE.ADMIN;
   socket.on(ADMIN.TOKEN, (data)=> {
     const condition = {"token.token": data.token};
+    console.log(data);
     Admin.findOne(condition).exec((err, admin)=> {
-      if (admin) {
-        socket.emit(SERVER.ADMINAUTHSUCC);
-        socket.on(ADMIN.PULMESSAGE, (data)=> {
-          socket.broadcast.emit('pulMess', data);
-        })
+      if (data.token) {
+        if (admin) {
+          socket.emit(SERVER.ADMINAUTHSUCC);
+          socket.on(ADMIN.PULMESSAGE, (data)=> {
+            socket.broadcast.emit('pulMess', data);
+          })
+        } else {
+          socket.emit(SERVER.ADMINAUTHFAIL);
+        }
       } else {
         socket.emit(SERVER.ADMINAUTHFAIL);
       }
     })
     socket.on(ADMIN.PULWALL, (data)=> {
       socket.broadcast.emit(SERVER.PULADMINWALLTOWALL, data)
+    })
+    socket.on(ADMIN.REDOMESSAGE, (data)=> {
+      socket.broadcast.emit(SERVER.REDOWALLMESSAGE, data)
     })
   })
 }

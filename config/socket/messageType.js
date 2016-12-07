@@ -21,7 +21,7 @@ const msgType = {
     REDOMESSAGE: 'ADMINREDOMESSAGE',    //管理员撤回消息
     SHIELDUSER: 'SHIELDUSER',              //管理员拉黑用户
     REDOSHIELDUSER: 'REDOSHIDLDUSER',     //管理员撤销拉黑用户
-    PULWALL: 'ADMINPULWALL'     //管理员上墙
+    PULWALL: 'ADMINPULWALL',     //管理员上墙
   },
   SERVER: {
     AUTHSUCC: 'AUTHSUCC',  //客户端验证通过

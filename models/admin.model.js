@@ -3,6 +3,7 @@
  */
 'use strict';
 const mongoose = require('mongoose');
+const md5=require('md5');
 const Schema = mongoose.Schema;
 
 let adminSchema = new Schema({
@@ -29,7 +30,10 @@ let adminSchema = new Schema({
   },
   token: {
     createAt: String,
-    token: String,
+    token: {
+      type: String,
+      default: md5(Date.now()+Math.random()*100000)
+    },
     expiresIn: String
   }
 })

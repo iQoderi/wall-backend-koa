@@ -5,6 +5,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const md5 = require('md5');
 
 let UserSchema = new Schema({
   id: {
@@ -29,9 +30,17 @@ let UserSchema = new Schema({
     type: Number,
     default: 0     //0 激活  //1 没有激活
   },
+  isBlock: {
+    required: true,
+    type: Number,
+    default: 0    //0 拉黑  1没有拉黑
+  },
   token: {
     createAt: String,
-    token: String,
+    token: {
+      type: String,
+      default: md5(Date.now() + Math.random() * 100000)
+    },
     expiresIn: String
   }
 });

@@ -24,6 +24,7 @@ const boomSocketController = (socket)=> {
           copyData.nickname = user.nickname;
           copyData.email = user.email;
           copyData.isActive = user.isActive;
+          console.log(copyData);
           socket.broadcast.emit(SERVER.PULBOOMMESSAGE, copyData)
           socket.emit(SERVER.PULBOOMSELF,copyData);
         })
