@@ -16,17 +16,16 @@ const boomSocketController = (socket)=> {
     User.findOne(condition).exec((err, user)=> {
       if (user) {
         socket.emit(SERVER.AUTHSUCC, ()=> {
-          console.log(13213)
+          socket.on(BOOM.RECVMESSAGE, (data)=> {
+            let copyData = data;
+            copyData.userId = user.id;
+            copyData.nickname = user.nickname;
+            copyData.email = user.email;
+            copyData.isActive = user.isActive;
+            socket.broadcast.emit(SERVER.PULBOOMMESSAGE, copyData)
+            socket.emit(SERVER.PULBOOMSELF,copyData);
+          })
         });
-        socket.on(BOOM.RECVMESSAGE, (data)=> {
-          let copyData = data;
-          copyData.userId = user.id;
-          copyData.nickname = user.nickname;
-          copyData.email = user.email;
-          copyData.isActive = user.isActive;
-          socket.broadcast.emit(SERVER.PULBOOMMESSAGE, copyData)
-          socket.emit(SERVER.PULBOOMSELF,copyData);
-        })
       } else {
         socket.emit(SERVER.AUTHFAIL);
       }
